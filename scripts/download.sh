@@ -62,7 +62,8 @@ download_server() {
 
   # Save version in volume
   if [ -n "$latest_version" ]; then
-    echo "$latest_version" > "$VERSION_FILE_SERVER"
+    echo "$latest_version" > "$VERSION_FILE_DOWNLOADER"
+    cp -f "$VERSION_FILE_DOWNLOADER" "$VERSION_FILE_SERVER"
   fi
 
   echo "Server download completed!"
@@ -100,12 +101,11 @@ check_server() {
   cd "$DOWNLOADER_DIR" || exit 1
 
   # Get latest version
-  if ! latest_version=$(eval "$DOWNLOADER_CMD -print-version" 2>/dev/null) || [ -n "$latest_version" ]; then
+  latest_version=$(eval "$DOWNLOADER_CMD -print-version" 2>/dev/null)
+  if [ -z "$latest_version" ]; then
     echo "Failed to get latest version"
     return 1
   fi
-
-  echo "latest: $latest_version"
 
   # Get current installed version
   if [ -f "$VERSION_FILE_DOWNLOADER" ]; then
