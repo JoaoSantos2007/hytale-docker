@@ -26,6 +26,7 @@ ENV PUID=1000 \
     AUTH_MODE=authenticated \
     ACCEPT_EARLY_PLUGINS=false \
     MAX_MEMORY=2048M \
+    JVM_ARGS="" \
     SESSION_TOKEN="" \
     IDENTITY_TOKEN="" \
     OWNER_UUID=""

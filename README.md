@@ -85,7 +85,7 @@ You can use the following values to change the settings of the server on boot.
 | DISABLE_SENTRY         | true                 | Disable Sentry crash reporting                                                        |
 | USE_AOT_CACHE          | true                 | Use Ahead-of-Time compilation cache for faster startup                                |
 | ACCEPT_EARLY_PLUGINS   | false                | Allow early plugins (may cause stability issues)                                      |
-| MAX_MEMORY             | 8G                   | Maximum JVM heap size (e.g., 8G, 8192M)                                               |
+| MAX_MEMORY             | 2048M                | Maximum JVM heap size (e.g., 8G, 8192M)                                               |
 | JVM_ARGS               |                      | Custom JVM arguments (optional)                                                       |
 | DOWNLOAD_ON_START      | true                 | Automatically download/update server files on startup                                 |
 
