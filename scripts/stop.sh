@@ -5,7 +5,7 @@ shutdown_server() {
     local return_val=0
     echo "Attempting graceful server shutdown..."
 
-    # Se tivermos o FIFO aberto, tentar comando /stop primeiro
+    # If we have the FIFO open, try the /stop command first.
     if [ -n "$FIFO" ] && [ -p "$FIFO" ]; then
         echo "Sending /stop command to server console..."
         echo "/stop" > "$FIFO" 2>/dev/null || true
