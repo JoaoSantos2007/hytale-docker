@@ -3,13 +3,21 @@
 # Returns 1 if it is not able to be shutdown
 shutdown_server() {
     local return_val=0
-    echo "Attempting graceful server shutdown"
-    
+    echo "Attempting graceful server shutdown..."
+
+    # Se tivermos o FIFO aberto, tentar comando /stop primeiro
+    if [ -n "$FIFO" ] && [ -p "$FIFO" ]; then
+        echo "Sending /stop command to server console..."
+        echo "/stop" > "$FIFO" 2>/dev/null || true
+        sleep 5
+    fi
+
     # Find the process ID
-    local pid=$(pgrep -f HytaleServer.jar)
-    
+    local pid
+    pid=$(pgrep -f HytaleServer.jar)
+
     if [ -n "$pid" ]; then
-        # Send SIGTERM to allow graceful shutdown
+        echo "Sending SIGTERM to Hytale server..."
         kill -SIGTERM "$pid"
         
         # Wait up to 30 seconds for process to exit
