@@ -17,4 +17,4 @@ services:
       - DOWNLOAD_ON_START=true
       
     stdin_open: true
-    tty: true
+    tty: false
