@@ -17,13 +17,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Set lowercase repository owner
         run: echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/${OWNER_LC}/hytale-server:latest .
+        run: docker build -t ghcr.io/${OWNER_LC}/hytale:latest .
 
       - name: Push Docker image
-        run: docker push ghcr.io/${OWNER_LC}/hytale-server:latest
+        run: docker push ghcr.io/${OWNER_LC}/hytale:latest
